@@ -6,8 +6,8 @@ def earth_radius(lat = None, km = False):
     earth_radius() gives the radius of the Earth.
 
     Args:
-        lat (float): latitude.
-        km (bool): units in kilometers (default units in meters)
+        lat (int,float) : latitude.
+        km (bool)       : units in kilometers (default units in meters)
 
     Synx & Desc:
         r = earth_radius() returns 6371000, the nominal radius of the Earth in meters.
@@ -54,8 +54,8 @@ def cdtgrid(res = [1, 1], centerLon = 0):
     cdtgrid() uses meshgrid to easily create a global grid of latitudes and longitudes..
 
     Args:
-        res (int, float): grid resolution.
-        centerLon (int, float): longitude as the center of the grids.
+        res (int, float)        : grid resolution.
+        centerLon (int, float)  : longitude as the center of the grids.
 
     Synx & Desc:
         [lat,lon] = cdtgrid() generates a meshgrid-style global grid of latitude and longitude
@@ -71,11 +71,8 @@ def cdtgrid(res = [1, 1], centerLon = 0):
         [lat,lon] = cdtgrid(...,centerLon) centers the grid on longitude value centerLon. Default
         centerLon is the Prime Meridian (0 degrees).
     """
-    # Error checks:
-    #assert len(res) <= 1, 'Input error: resolution res must have one or two elements.'
-    #assert max(res) < 90, 'Error, I assume. Resolution should not exceed 90 degrees.'
-    
     if np.any(res):
+        assert np.max(res) < 90, 'Error, I assume. Resolution should not exceed 90 degrees.'
         if isinstance(res,(float,int)):
             res = [res, res]
         else:
@@ -100,7 +97,7 @@ def cdtdim(lat, lon, km = False):
     Args:
         lat (int, float): latitude.
         lon (int, float): longitude.
-        km (bool) : units in kilometers (default units in meters)
+        km (bool)       : units in kilometers (default units in meters)
 
     Synx & Desc:
         [dx, dy] = cdtdim(lat, lon) gives an approximate dimensions in meters of each grid cell given 
@@ -108,14 +105,12 @@ def cdtdim(lat, lon, km = False):
         as if they were created by meshgrid. 
         [dx, dy] = cdtdim(lat, lon, km = True) gives grid cell sizes in kilometers rather than the default meters.
     """
-    # Errors check
-    if lat.ndim != 2 or lon.ndim != 2:
-        raise ValueError('Input error: lat and lon must be 2D grids as if created by np.meshgrid.')
-    if lat.shape != lon.shape:
-        raise ValueError('Input error: the dimensions of lat and lon must agree.')
-    if islatlon(lat, lon) == False:
-        raise ValueError('Input error: Some of the values in lat or lon do not match typical lat,lon ranges. Check inputs and try again.')
-
+    # Initial errors check:
+    assert len(sys.argv) >= 2, 'Error: cdtgradient requires at least two inputs: latNo documeNo docume and lon.'
+    assert np.array_equal(np.ndim(lat),2) and np.array_equal(np.ndim(lon),2), 'Error: lat and lon must be grids, not arrays.'
+    assert np.array_equal(np.shape(lat),np.shape(lon)), 'Input error: the dimensions of lat and lon must match.'
+    assert islatlon(lat, lon) == True, 'Input error: cdtgradient requires the first two inputs to be lat and lon.'
+    
     # Set defaults
     r = earth_radius(lat)
     
@@ -155,7 +150,7 @@ def cdtarea(lat, lon, km2 = False):
     Args:
         lat (int, float): latitude.
         lon (int, float): longitude.
-        km2 (bool) : units in square kilometers (default units in square meters)
+        km2 (bool)      : units in square kilometers (default units in square meters)
 
     Synx & Desc:
         A = cdtarea(lat, lon) gives an approximate area of each grid cell given by lat,lon. Inputs
@@ -177,8 +172,8 @@ def cdtgradient(lat, lon, F, km = False):
     Args:
         lat (int, float): latitude.
         lon (int, float): longitude.
-        F (int, float): gridded variable F.
-        km (bool) : units in kilometers (default units in meters)
+        F (int, float)  : gridded variable F.
+        km (bool)       : units in kilometers (default units in meters)
 
     Synx & Desc:
         [FX, FY] = cdtgradient(lat, lon, F) for the gridded variable F and corresponding geographic
@@ -193,9 +188,9 @@ def cdtgradient(lat, lon, F, km = False):
         [FX, FY] = cdtgradient(lat, lon, F, km = True) returns gradients per kilometer rather than the
         default meters. 
     """
-    # Initial error checks: 
-    assert len(sys.argv) > 2, 'Error: cdtgradient requires at least three inputs: lat, lon, and F.'
-    assert len(sys.argv) > 4, 'Unrecognized input.'
+    # Initial errors check: 
+    assert len(sys.argv) >= 2, 'Error: cdtgradient requires at least three inputs: lat, lon, and F.'
+    assert len(sys.argv) <= 4, 'Unrecognized input.'
     assert np.array_equal(np.ndim(lat),2) and np.array_equal(np.ndim(lon),2), 'Error: lat and lon must be grids, not arrays.'
     assert islatlon(lat, lon) == True, 'Input error: cdtgradient requires the first two inputs to be lat and lon.'
     
@@ -225,8 +220,8 @@ def cdtdivergence(lat, lon, U, V):
     Args:
         lat (int, float): latitude.
         lon (int, float): longitude.
-        U (int, float): gridded vector's component U.
-        V (int, float): gridded vector's component V.
+        U (int, float)  : gridded vector's component U.
+        V (int, float)  : gridded vector's component V.
 
     Synx & Desc:
         D = cdtdivergence(lat,lon,U,V) uses cdtdim to estimate the dimensions of each
@@ -265,14 +260,14 @@ def cdtcurl(lat, lon, U, V):
     Args:
         lat (int, float): latitude.
         lon (int, float): longitude.
-        U (int, float): gridded vector's component U.
-        V (int, float): gridded vector's component V.
+        U (int, float)  : gridded vector's component U.
+        V (int, float)  : gridded vector's component V.
 
     Synx & Desc:
         Cz = cdtcurl(lat,lon,U,V) uses cdtdim to estimate the dimensions of each grid cell in the 
         lat,lon grid, then computes the curl of the gridded vectors U,V.  
     """
-    # Initial error checks: 
+    # Initial errors check: 
     assert len(sys.argv) >= 4, 'Error: cdtdivergence only requires four inputs: lat, lon, U, and V.'
     assert np.array_equal(np.ndim(lat),2) and np.array_equal(np.ndim(lon),2), 'Error: lat and lon must be grids, not arrays.'
     assert np.array_equal(np.shape(lat),np.shape(lon)), 'Input error: the dimensions of lat and lon must match.'
