@@ -1,6 +1,7 @@
 # Climate Data Tools for Python v 0.1.0 (Beta Version)
 
 A simple Python package for analyzing of climate-related disciplines of Earth science data.
+Inspired by Climate Data Toolbox for MATLAB by Greene et.al., 2019 (doi:10.1029/2019GC008392)
 
 ## Installation
 1. Open a terminal or command prompt and navigate to the root directory of your Python package.
@@ -22,5 +23,4 @@ A simple Python package for analyzing of climate-related disciplines of Earth sc
   - **cdtdivergence** calculates the divergence of gridded vectors on the ellipsoidal Earth's surface.
   - **cdtcurl** calculates the z component of curl for gridded vectors on an ellipsoidal Earth.
 
-  
 (c) R.B. Hatmaja, 2023
