@@ -1,12 +1,11 @@
-# Climate Data Tools for Python v 0.2.0 (Beta Version)
+# Climate Data Tools for Python v 1.0.0
 
 A simple Python package for analyzing climate-related disciplines of Earth science data.  
 Inspired by and (partially) translated from Climate Data Toolbox for MATLAB by Greene et.al., 2019 (doi:10.1029/2019GC008392).  
 Disclaimer: This is a beta or pre-distribution version.
 
 ## Installation
-1. Open a terminal or command prompt and navigate to the root directory of your Python package.
-2. Run: pip install -e .
+1. pip install cdtPy
 
 ## Pre-requisted python libz
 - numpy
