@@ -6,10 +6,9 @@ Unravel the mysteries of our planet's climate with cdtPy.
 Harness the power of data analysis, visualization, and research to contribute to our collective understanding of Earth's intricate climate systems. 
 
 **Why Choose cdtPy**
-
-**User-Friendly**: Our user-centric design ensures that both beginners and seasoned professionals can navigate the package effortlessly.
-**Open Source**: cdtPy is an open-source project, promoting collaboration and constant improvement within the Earth science community.
-**Robust Documentation**: Our extensive documentation, tutorials, and examples guide you through every aspect of using the package, from installation to advanced analysis.
+*User-Friendly*: Our user-centric design ensures that both beginners and seasoned professionals can navigate the package effortlessly.
+*Open Source*: cdtPy is an open-source project, promoting collaboration and constant improvement within the Earth science community.
+*Robust Documentation*: Our extensive documentation, tutorials, and examples guide you through every aspect of using the package, from installation to advanced analysis.
 
 ## Installation
 pip install cdtPy
