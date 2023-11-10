@@ -12,7 +12,7 @@ Harness the power of data analysis, visualization, and research to contribute to
 **Robust Documentation**: Our extensive documentation, tutorials, and examples guide you through every aspect of using the package, from installation to advanced analysis.
 
 ## Installation
-1. pip install cdtPy
+pip install cdtPy
 
 ## Pre-requisted python libz
 - numpy
