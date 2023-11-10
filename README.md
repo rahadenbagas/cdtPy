@@ -19,7 +19,7 @@ Why Choose **cdtPy**:
 - matplotlib
 - xarray
 
-## Unleash the Full Potential of cdtPy:
+## Unleash the full potential of cdtPy:
 - **geoGrd (Geophysical attributes and georeferenced grids):**
   - **earth_radius** gives the nominal or latitude-dependent radius of Earth.
   - **islatlon** determines whether lat, lon is likely to represent geographical coordinates. This function is used for input parsing in many CDT functions.
